@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🗞️ Newspaper Site</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        min-height: 100vh; /* Full height of viewport */
+        display: flex;
+        flex-direction: column;
+        }
+        .navbar {
+            background-color: #1e90ff;
+            padding: 10px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        .content {
+            padding: 20px;
+        }
+        .search-box input[type="text"] {
+            padding: 5px;
+        }
+        .search-box button {
+            padding: 5px 10px;
+            margin-left: 5px;
+        }
+        .content {
+        flex: 1; /* 🛠 Make content area grow */
+        padding: 20px;
+    }
+        footer {
+        background-color: #1e90ff;
+        color: white;
+        padding: 30px 20px;
+        margin-top: 40px;
+    }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-left">
+            <!-- <h1>Newspaper</h1>
+            <br> -->
+            <a href="{% url 'home' %}">🏠 Home</a>
+            {% for cat in categories %}
+                <a href="{% url 'category_articles' cat.id %}">{{ cat.name }}</a>
+            {% endfor %}
+        </div>
+        <div class="nav-right">
+            <form class="d-flex mb-3" action="{% url 'search_articles' %}" method="get">
+                <input class="form-control me-2" type="text" name="q" placeholder="Search articles...">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+<footer style="background-color: #1e90ff; color: white; padding: 30px 20px; margin-top: 40px;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1200px; margin: auto;">
+
+        <!-- Website Info -->
+        <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+            <h3>📰 Newspaper Site</h3>
+            <p>Your trusted source for the latest news and updates.</p>
+        </div>
+
+        <!-- Contact Info -->
+        <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+            <h4>📍 Location</h4>
+            <p>Mohammodpur,<br>Dhaka, Bangladesh</p>
+
+            <h4>📞 Contact</h4>
+            <p>Phone: +8801825741448</p>
+            <p>Email: info@newspapersite.com</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+            <h4>🔗 Quick Links</h4>
+            <ul style="list-style: none; padding: 0;">
+                <li><a href="{% url 'home' %}" style="color: white; text-decoration: none;">🏠 Home</a></li>
+                {% for cat in categories %}
+                    <li><a href="{% url 'category_articles' cat.id %}" style="color: white; text-decoration: none;">📂 {{ cat.name }}</a></li>
+                {% endfor %}
+                <li><a href="#" style="color: white; text-decoration: none;">ℹ️ About Us</a></li>
+                <li><a href="#" style="color: white; text-decoration: none;">📄 Privacy Policy</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <hr style="border-color: white; margin: 20px 0;">
+
+    <p style="text-align: center;">&copy; {{ now|date:"Y" }} Newspaper Site. All rights reserved.</p>
+</footer>
+</body>
+</html>
+
